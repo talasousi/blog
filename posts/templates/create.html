@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<style>
+
+			h1{
+				color:red;
+			}
+
+			p{
+				color:blue;
+			}
+	</style>
+</head>
+	<body>
+		<h1>{{title}}</h1>
+		<p>{{content.title}}</p>
+		<p>{{content.content}}</p>
+		<p>{{content.timestamp}}</p>
+		<p>{{content.updated}}</p>
+
+		<p>{{user}}</p>
+		<ol>
+	<li>lklklk</li>
+	<li>jnwjdnjn</li>
+		<li>fjeijefijfe</li>
+	</ol>
+	<p>{{random_numbers}}</p>
+		<ul>
+		{%for x in list%}
+		<li>{{x.title}}</li>
+		{%endfor%}
+	</ul>
+	</body>
+</html>
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>
+		{% block head %}
+
+		{% endblock head%}
+	</title>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<h1>hello</h1>
+
+{% include 'messages.html' %}
+
+{% block content %}
+
+{% endblock content%}
+</body>
+</html>

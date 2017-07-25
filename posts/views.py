@@ -1,27 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-import random
 from .models import Post
 from django.shortcuts import get_object_or_404
+from .forms import PostForm
+from django.contrib	import messages
 # Create your views here.
 
-def post_create(request):
-	post_list = Post.objects.all()
-	content = Post.objects.all().first()
+#def post_create(request):
+#	content = Post.objects.all().first()
+#	context = {
+#		"title": "Post Page",
+#		"content": content,
+##		"list": post_list,
+#	}
+#	return render(request, 'create.html', context)
+
+def post_update(request, post_id):
+	post_object = get_object_or_404(Post, id=post_id)
+	form = PostForm(request.POST or None, instance=post_object)
+	if form.is_valid():
+		form.save()
+		messages.success(request, "Post updated")
+		return redirect("posts:list")
 	context = {
-		"title": "Post Page",
-		"content": content,
-		"random_numbers": random.randint(1,1000),
-		"user": request.user,
-		"list": post_list,
+		"form": form,
+		"post_object": post_object,
 	}
-	return render(request, 'create.html', context)
 
-def post_update(request):
-	return HttpResponse("<h1> Update <h1>")
+	return render(request, 'post_update.html', context)
 
-def post_delete(request):
-	return HttpResponse("<h1> Delete <h1>")
+def post_delete(request, post_id):
+	Post.objects.get(id=post_id).delete()
+	messages.warning(request, "message deleted")
+	return redirect("posts:list")
 
 def post_list(request):
 	obj_list = Post.objects.all()
@@ -31,21 +42,21 @@ def post_list(request):
 
 	return render(request, 'post_list.html', context)
 
-def post_detail(request):
-	return HttpResponse("<h1> Detail <h1>")
-
-def cat(request):
-	return HttpResponse("<h1> Cat <h1>")
-
-def dog(request):
-	return HttpResponse("<h1> Dog <h1>")
-
-def mouse(request):
-	return HttpResponse("<h1> Mouse <h1>")
-
 def post_detail(request, post_id):
 	obj = get_object_or_404(Post, id=post_id)
 	context = {
 		"instance": obj,
 	}
 	return render(request, 'post_detail.html', context)
+
+def post_create(request):
+	form = PostForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		messages.success(request, "Post created")
+		return redirect("posts:list")
+	context = {
+		"form": form,
+	}
+
+	return render(request, 'post_create.html', context)

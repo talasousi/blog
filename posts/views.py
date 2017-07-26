@@ -35,7 +35,7 @@ def post_delete(request, post_id):
 	return redirect("posts:list")
 
 def post_list(request):
-	obj_list = Post.objects.all()
+	obj_list = Post.objects.all()#.order_by("-timestamp", "-updated")
 	context = {
 		"post_list": obj_list,
 	}

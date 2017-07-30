@@ -8,16 +8,16 @@
 {%for x in post_list %}
 	<div class="col-sm-6">
 	<div class="thumbnail">
-	{%if x.image %}
-		<img src="{{x.image.url}}" class="img-responsive">
+		{%if x.image %}
+			<img src="{{x.image.url}}" class="img-responsive">
 		{% endif %}
 	    <div class="caption">
 		        <h3>{{x.title}}<small>{{x.timestamp|timesince}} ago</small></h3>
 		        <p>{{x.content|linebreaks|truncatechars:10}}</p>
 		        <p>
 		        <a href="{{x.get_absolute_url}}" class="btn btn-primary" role="button">View</a>
-		        <a href="{% url 'posts:update' post_id=x.id %}" class="btn btn-success" role="button">Edit</a>
-		        <a href="{% url 'posts:delete' post_id=x.id %}" class="btn btn-danger" role="button">Delete</a>
+		        <a href="{% url 'posts:update' slug=x.slug %}" class="btn btn-success" role="button">Edit</a>
+		        <a href="{% url 'posts:delete' slug=x.slug %}" class="btn btn-danger" role="button">Delete</a>
 		        </p>
 	      	</div>
 	    </div>

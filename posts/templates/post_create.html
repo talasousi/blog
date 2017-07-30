@@ -4,7 +4,7 @@
 
 {% block content %}
 
-	<form method="POST" action="{% url 'posts:create' %}" enctype="multipart/form-data">
+	<form method="POST" action="{% url 'posts:create' %}"post_create>
 		{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="Create Post">

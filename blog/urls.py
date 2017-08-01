@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include('posts.urls', namespace="posts")),
     url(r'^stories/', include('stories.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     ]
 
 if settings.DEBUG:

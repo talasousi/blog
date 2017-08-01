@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load urlify %}
+{% load crispy_forms_tags %}
+{% load comments %}
 {% block head %} Detail {% endblock head%}
 
 
@@ -35,6 +37,7 @@
 		        </p>
 	      	</div>
 	    </div>
+	    {% include "django_comments.html" %}
 	</div>
 
 <a href="{% url 'posts:list' %}"> Go back to list</a>

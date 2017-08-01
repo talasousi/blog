@@ -10,22 +10,29 @@
 			<img src="{{instance.image.url}}" class="img-responsive">
 		{% endif %}
 	    <div class="caption">
-		        <h3>{{instance.title}}<small>{{instance.timestamp|timesince}} ago</small></h3>
-		        <p>{{instance.content|linebreaks|truncatechars:10}}</p>
+		        <h3>{{instance.title}}<small>{{instance.publish|timesince}} ago</small></h3>
+		        <p>{{instance.content|linebreaks|truncatechars:500}}</p>
+
+		        Author: {{instance.author.get_full_name}}
 		        <p>
-		        <a href="{{instance.get_absolute_url}}" class="btn btn-primary" role="button">View</a>
 		        <a href="{% url 'posts:update' slug=instance.slug %}" class="btn btn-success" role="button">Edit</a>
 		        <a href="{% url 'posts:delete' slug=instance.slug %}" class="btn btn-danger" role="button">Delete</a>
 		        </p>
+		        <p>
 		        <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">Share on Facebook
 		        </a>
+		        </p>
 
+		        <p>
 		        <a href="https://twitter.com/home?status={{instance.content|truncatechars:35|urlify}}%20{{request.build_absolute_uri}}">Share on Twitter
 		        </a>
+		        </p>
 
+		        <p>
 		        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
 		        Share on Linkedin
 		        </a>
+		        </p>
 	      	</div>
 	    </div>
 	</div>

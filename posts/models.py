@@ -37,3 +37,8 @@ def post_receiver(sender, instance, *args, **kwargs):
 		instance.save()
 
 post_save.connect(post_receiver, sender=Post)
+
+class Like(models.Model):
+	user = models.ForeignKey(User)
+	post = models.ForeignKey(Post)
+	

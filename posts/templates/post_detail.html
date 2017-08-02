@@ -37,15 +37,16 @@
 		        </p>
 	      	</div>
 	    </div>
-	    <button class="btn" onclick="ajax_likes()">
+{# 	    <button class="btn" onclick="ajax_likes()">
 	    <spam id="likes_count">{{like_count}}</spam>
 	    <span id="heart" class="glyphicon glyphicon-heart {% if liked %} text-danger {% endif %}" aria-hidden="true"></span>
 	    </button>
-	    {% include "django_comments.html" %}
+	    {% include "django_comments.html" %} #}
 	</div>
 
+<div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
 <a href="{% url 'posts:list' %}"> Go back to list</a>
-
+{# 
 <script>
 	function ajax_likes()
 	{
@@ -69,4 +70,5 @@
 	}
 
 </script>
+ #}
 {% endblock content %}

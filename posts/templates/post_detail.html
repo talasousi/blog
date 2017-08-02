@@ -37,9 +37,36 @@
 		        </p>
 	      	</div>
 	    </div>
+	    <button class="btn" onclick="ajax_likes()">
+	    <spam id="likes_count">{{like_count}}</spam>
+	    <span id="heart" class="glyphicon glyphicon-heart {% if liked %} text-danger {% endif %}" aria-hidden="true"></span>
+	    </button>
 	    {% include "django_comments.html" %}
 	</div>
 
 <a href="{% url 'posts:list' %}"> Go back to list</a>
 
+<script>
+	function ajax_likes()
+	{
+		console.log("Like/Unlike cliked!");
+		$.ajax({
+			type: 'GET',
+			url: '{% url "posts:like_button" post_id=instance.id %}',
+			error: function(){
+				console.log("noob")
+			},
+			success: function(data){
+				$("#likes_count").text(data.like_count);
+				
+				if (data.action==="like"){
+					$("#heart").addClass("text-danger")
+				}else{
+					$("#heart").removeClass("text-danger")
+				}
+			},
+		});
+	}
+
+</script>
 {% endblock content %}

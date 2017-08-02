@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^update/(?P<slug>[-\w]+)/$', views.post_update , name='update'),
     url(r'^delete/(?P<slug>[-\w]+)$', views.post_delete , name='delete'),
     url(r'^detail/(?P<slug>[-\w]+)/$', views.post_detail , name='detail'),
+    url(r'^like_button/(?P<post_id>[\d]+)/$', views.like_button , name='like_button'),
 	]

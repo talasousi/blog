@@ -6,34 +6,35 @@ from rest_framework_jwt.settings import api_settings
 
 
 class PostListSerializer(serializers.ModelSerializer):
-		author = serializers.SerializerMethodField()
-		detail = serializers.HyperlinkedIdentityField(
-			view_name="api:detail",
-			lookup_field="slug",
-			lookup_url_kwarg="port_slug",
-			)
+	author = serializers.SerializerMethodField()
+	detail = serializers.HyperlinkedIdentityField(
+		view_name="api:detail",
+		lookup_field="slug",
+		lookup_url_kwarg="post_slug",
+		)
 
-		class Meta:
-			model = Post
-			fields = ['title', 'author', 'slug', 'content','publish', 'detail']
+	class Meta:
+		model = Post
+		fields = ['title', 'author', 'slug', 'content','publish', 'detail']
 	
-			def get_author(self, obj):
-				return str(obj.author.username)
+	def get_author(self, obj):
+		return str(obj.author.username)
 
 class PostDetailSerializer(serializers.ModelSerializer):
 	author = serializers.SerializerMethodField()
 	user = serializers.SerializerMethodField()
 	comments = serializers.SerializerMethodField()
 
+
 	delete = serializers.HyperlinkedIdentityField(
 		view_name="api:delete",
 		lookup_field="slug",
-		lookup_url_kwarg="port_slug",
+		lookup_url_kwarg="post_slug",
 		)
 	update = serializers.HyperlinkedIdentityField(
 		view_name="api:update",
 		lookup_field="slug",
-		lookup_url_kwarg="port_slug",
+		lookup_url_kwarg="post_slug",
 		)
 
 	class Meta:
@@ -91,6 +92,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
 	username = serializers.CharField()
 	password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+	token = serializers.CharField(allow_blank=True, read_only=True)
 
 	
 	def validate(self, data):

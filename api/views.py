@@ -83,7 +83,7 @@ class CommentListAPIView(ListAPIView):
 class CommentCreateAPIView(CreateAPIView):
 	queryset = Comment.objects.all()
 	serializer_class = CommentCreateSerializer
-	permission_classes = [IsAuthenticated]
+	#permission_classes = [IsAuthenticated]
 
 	def perform_create(self, serializer):
 		serializer.save(

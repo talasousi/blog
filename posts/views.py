@@ -125,6 +125,7 @@ def post_list(request):
 			Q(author__first_name__icontains=query)|
 			Q(author__last_name__icontains=query)
 			).distinct()
+		
 
 	paginator = Paginator(obj_list, 4) # Show 25 contacts per page
 

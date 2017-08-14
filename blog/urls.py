@@ -23,7 +23,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include('posts.urls', namespace="posts")),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^api/', include('api.urls', namespace="api"))
+    url(r'^api/', include('api.urls', namespace="api")),
+    url(r'^google/', include('google.urls', namespace="google")),
+    url(r'^accounts/', include('allauth.urls')),
     ]
 
 if settings.DEBUG:
